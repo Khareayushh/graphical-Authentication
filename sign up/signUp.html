@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.js"></script>
+</head>
+<body onload="randomizeEmojis()">
+
+    <section>
+        <div class="container">
+            <div class="cont-left">
+                <div class="container2">
+                    <div id="gridContainer"></div>
+                    <br><br>
+                    <button id="randomizeBtn">Clear</button>
+                </div>
+            </div>
+            <div class="cont-right">
+                <form class="form">
+                    <!-- <h3>Welcome to ZERO</h3> -->
+                    <p class="sub-heading">Create your account</p>
+                    <p class="label">Email Address</p>
+                    <input type="email" class="input" id="email" name="email" placeholder="Enter your email" required>
+                    <p class="label">Password</p>
+                    <input type="password" class="input" id="password" name="password" placeholder="Your password" maxlength="18" required>
+    
+                    <button type="button" id="submitData" name="submitData" class="registerbtn">Register</button>
+                    
+                </form>
+            </div>
+            
+            
+        </div>
+        
+        
+    </section>
+    
+</body>
+</html>
+
+<!-- <script src="./index.js"></script> -->
+<script>
+    
+        const gcontainer = document.getElementById("gridContainer");
+        const randomizeBtn = document.getElementById("randomizeBtn");
+        const selectedEmoji = document.getElementById("selectedEmoji");
+        const emojis = [
+            "😀",
+            "😃",
+            "😄",
+            "😁",
+            "😆",
+            "😅",
+            "😂",
+            "😊",
+            "😇",
+            "🥰",
+            "😍",
+            "🤩",
+            "😘",
+            "😗",
+            "😚",
+            "😙",
+            "😜",
+            "😝",
+            "😛",
+            "🤪",
+            "😎",
+            "🤓",
+            "😏",
+            "😒",
+            "😞",
+        ];
+        const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+        let selected = [];
+
+        for (let i = 0; i < 25; i++) {
+            let div = document.createElement("div");
+            div.innerHTML = emojis[i];
+            div.setAttribute("data-value", alphabets[i]);
+            div.addEventListener("click", function () {
+                if (selected.length == 4) {
+                    console.log(selected);
+                    return;
+                }
+                if (selected.indexOf(this) === -1) {
+                    selected.push(this.getAttribute("data-value"));
+                    // selectedEmoji.innerHTML = selected.join("");
+                    this.style.backgroundColor = "green";
+                } else {
+                    selected.splice(selected.indexOf(this), 1);
+                    this.style.backgroundColor = "";
+                }
+                if (selected.length == 4) {
+                    console.log(selected);
+                    return;
+                }
+            });
+            gcontainer.appendChild(div);
+
+            if ((i + 1) % 5 === 0) {
+                gcontainer.appendChild(document.createElement("br"));
+            }
+        }
+
+        // randomizeBtn.addEventListener("click", function () {
+        //     let children = Array.from(gcontainer.children);
+        //     let emojisDiv = children.filter((child) => child.tagName === "DIV");
+
+        //     for (let i = 0; i < emojisDiv.length; i++) {
+        //         let randomIndex = Math.floor(Math.random() * emojisDiv.length);
+        //         let temp = emojisDiv[i].innerHTML;
+        //         let tempValue = emojisDiv[i].getAttribute("data-value");
+        //         emojisDiv[i].innerHTML = emojisDiv[randomIndex].innerHTML;
+        //         emojisDiv[i].setAttribute(
+        //             "data-value",
+        //             emojisDiv[randomIndex].getAttribute("data-value")
+        //         );
+        //         emojisDiv[randomIndex].innerHTML = temp;
+        //         emojisDiv[randomIndex].setAttribute("data-value", tempValue);
+        //         emojisDiv[i].style.backgroundColor = "";
+        //     }
+        //     selected = [];
+        //     selectedEmoji.innerHTML = "";
+        // });
+
+        function randomizeEmojis() {
+            let children = Array.from(gcontainer.children);
+            let emojisDiv = children.filter((child) => child.tagName === "DIV");
+
+            for (let i = 0; i < emojisDiv.length; i++) {
+                let randomIndex = Math.floor(Math.random() * emojisDiv.length);
+                let temp = emojisDiv[i].innerHTML;
+                let tempValue = emojisDiv[i].getAttribute("data-value");
+                emojisDiv[i].innerHTML = emojisDiv[randomIndex].innerHTML;
+                emojisDiv[i].setAttribute(
+                    "data-value",
+                    emojisDiv[randomIndex].getAttribute("data-value")
+                );
+                emojisDiv[randomIndex].innerHTML = temp;
+                emojisDiv[randomIndex].setAttribute("data-value", tempValue);
+                emojisDiv[i].style.backgroundColor = "";
+            }
+
+            selected = [];
+            selectedEmoji.innerHTML = "";
+        }
+
+    let hashpass = (selected) => {
+        const Pass = selected.toString();
+        let pass = Pass.replace(new RegExp(",", "g"), "");
+        // const password = "secretPassword";
+        let hash = sha256(pass);
+        console.log(`Password hash: ${hash}`);
+        return hash;
+    }
+
+</script>
+
+<script>
+    
+</script>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    // import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+    import { getFirestore, collection, addDoc, getDoc, doc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAFIBXh1WnUJ-gTi61ruL4hYYTAngykEYc",
+        authDomain: "graphical-authentication-73a5e.firebaseapp.com",
+        projectId: "graphical-authentication-73a5e",
+        storageBucket: "graphical-authentication-73a5e.appspot.com",
+        messagingSenderId: "731182727348",
+        appId: "1:731182727348:web:cd08c8d26068088d39d7e1",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    // const database = getDatabase(app);
+
+    const db = getFirestore();
+
+    const colRef = collection(db, 'users');
+
+    // getDocs(colRef)
+    //     .then((snapshot) => {
+    //         let books = [];
+    //         snapshot.docs.forEach((doc) => {
+    //             books.push({...doc.data(), id: doc.id});
+    //         })
+
+    //         console.log(books);
+    //     })
+    //     .catch(err => {
+    //         console.log(err.message);
+    //     })
+
+
+    let form = document.querySelector(".form");
+    submitData.addEventListener('click', (e) =>{
+        const email = form.email.value;
+        const password = form.password.value;
+        let ans = hashpass(selected);
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user.uid);
+            addDoc(colRef, {
+                email: email,
+                grid_pass: ans,
+                password: password
+            })
+            .then(() => {
+                alert("sign up successful");
+                form.reset();
+                location.replace("../login-page/welcome.html")
+            })
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+            alert(errorMessage);
+        });
+    })
+
+    // const q = query(colRef, where("email", "==", "anumishra@gmail.com"))
+
+    // onSnapshot(q, (snapshot) => {
+    //     let ans = []
+    //     snapshot.docs.forEach((doc) => {
+    //         ans.push({...doc.data(), id: doc.id})
+    //     })
+        
+    //     console.log(ans[0].grid_pass)
+    // })
+
+
+</script>
