@@ -17,8 +17,13 @@
                 <div class="container2">
                     <div id="gridContainer"></div>
                     <br><br>
-                    <button id="randomizeBtn">Clear</button>
+                    <div class="btn-container">
+                    <button id="randomizeBtn" class="btn-section">Clear</button>
+                    <button class="prev btn-section">Back</button>
+                    <button type="button" id="submitData" name="submitData" class="registerbtn btn-section">Register</button>
+                    </div>
                 </div>
+              
             </div>
             <div class="cont-right">
                 <form class="form">
@@ -29,9 +34,10 @@
                     <p class="label">Password</p>
                     <input type="password" class="input" id="password" name="password" placeholder="Your password" maxlength="18" required>
     
-                    <button type="button" id="submitData" name="submitData" class="registerbtn">Register</button>
+                    <!-- <button type="button" id="submitData" name="submitData" class="registerbtn">Register</button> -->
                     
                 </form>
+                <button class="next">Next</button>
             </div>
             
             
@@ -45,7 +51,31 @@
 
 <!-- <script src="./index.js"></script> -->
 <script>
-    
+        
+        let next=document.querySelector(".next");
+        let prev=document.querySelector(".prev");
+        let cont_right=document.querySelector(".cont-right");
+        let cont_left=document.querySelector(".cont-left");
+        next.addEventListener("click",xyz);
+        prev.addEventListener("click",xyz);
+        function xyz()
+        {
+            if(!(cont_left.classList.contains("active2")))
+            {
+                
+            cont_right.classList.add("active");
+            cont_left.classList.add("active2");
+            }
+            else
+            {
+                console.log("yes");
+                cont_right.classList.remove("active");
+                cont_left.classList.remove("active2");
+            }
+        }
+
+
+
         const gcontainer = document.getElementById("gridContainer");
         const randomizeBtn = document.getElementById("randomizeBtn");
         const selectedEmoji = document.getElementById("selectedEmoji");
