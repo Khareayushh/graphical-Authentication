@@ -32,12 +32,10 @@
                     <button type="button" id="submitData" name="submitData" class="registerbtn">Register</button>
                     
                 </form>
-                <div class="categories"></div>
             </div>
             
             
         </div>
-
         
         
     </section>
@@ -47,7 +45,6 @@
 
 <!-- <script src="./index.js"></script> -->
 <script>
-        const url = 'data.json';
     
         const gcontainer = document.getElementById("gridContainer");
         const randomizeBtn = document.getElementById("randomizeBtn");
@@ -81,82 +78,6 @@
         ];
         const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
         let selected = [];
-
-        // Create buttons for each category
-        const categoriesDiv = document.querySelector('.categories');
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            Object.keys(data).forEach(category => {
-            const button = document.createElement('button');
-            button.textContent = category;
-            button.addEventListener('click', () => generateEmojiGrid(data[category]));
-            categoriesDiv.appendChild(button);
-            });
-        })
-        .catch(error => console.error(error));
-
-        // Generate the grid for the selected category
-        function generateEmojiGrid(category) {
-            const grid = document.querySelector('.gridContainer');
-            grid.innerHTML = '';
-            const shuffledEmojis = shuffle([...category]);
-            for (let i = 0; i < 25; i++) {
-                const emoji = shuffledEmojis[i % shuffledEmojis.length];
-                const cell = document.createElement('div');
-                cell.classList.add('cell');
-                cell.textContent = emoji;
-                grid.appendChild(cell);
-            }
-        }
-
-        // Shuffle function using the Fisher-Yates algorithm
-        function shuffle(arr) {
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
-        }
-
-        // Fetch the JSON data from file
-        // fetch('emojis.json')
-        // .then(response => response.json())
-        // .then(data => {
-        //     // Get the container for the emojis
-        //     const gridContainer = document.getElementById('gridContainer');
-
-        //     // Create options for each category
-        //     for (const category in data) {
-        //     const option = document.createElement('option');
-        //     option.value = category;
-        //     option.text = category.charAt(0).toUpperCase() + category.slice(1);
-        //     document.getElementById('emojiSelect').add(option);
-
-        //     // Create a grid of emojis for the category
-        //     const emojis = data[category];
-        //     const grid = document.createElement('div');
-        //     grid.classList.add('emoji-grid');
-        //     grid.setAttribute('id', category + 'Grid');
-        //     for (const emoji of emojis) {
-        //         const span = document.createElement('span');
-        //         span.innerText = emoji;
-        //         grid.appendChild(span);
-        //     }
-        //     gridContainer.appendChild(grid);
-        //     }
-
-        //     // Add event listener for the select element
-        //     const select = document.getElementById('emojiSelect');
-        //     select.addEventListener('change', (event) => {
-        //     const category = event.target.value;
-        //     const grids = document.querySelectorAll('.emoji-grid');
-        //     grids.forEach(grid => grid.style.display = 'none');
-        //     document.getElementById(category + 'Grid').style.display = 'grid';
-        //     });
-        // })
-        // .catch(error => console.error('Error fetching emojis:', error));
-
 
         for (let i = 0; i < 25; i++) {
             let div = document.createElement("div");
