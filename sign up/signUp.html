@@ -140,6 +140,9 @@
                     console.log(selected);
                 }
                 if(selected.length == 4){
+                    //sorts the array then goes for hashing.
+                    selected.sort();
+                    console.log(selected);
                     hashpass(selected);
                 }
                 });
@@ -156,15 +159,15 @@
             // Add event listener to clear button
             const clearButton = document.getElementById('clear');
             clearButton.addEventListener('click', function() {
-            selected.forEach(value => {
-                const selectedEmoji = emojiGrid.querySelector(`[data-value="${value}"]`);
-                selectedEmoji.style.backgroundColor = '';
-            });
-            selected.length = 0;
-            console.log(selected);
+                selected.forEach(value => {
+                    const selectedEmoji = emojiGrid.querySelector(`[data-value="${value}"]`);
+                    selectedEmoji.style.backgroundColor = '';
+                });
+                selected.length = 0;
+                console.log(selected);
             });
         });
-        
+    
     let hashpass = (selected) => {
         const Pass = selected.toString();
         let pass = Pass.replace(new RegExp(",", "g"), "");
