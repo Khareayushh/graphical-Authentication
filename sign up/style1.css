@@ -42,6 +42,7 @@ section{
     padding: 22px;
     border-radius: 15px;
     gap: 50px;
+   
 }
 
 .cont-left{
@@ -50,6 +51,15 @@ section{
     display: none;
 }
 .active
+{
+    display: none !important;
+}
+.active-1
+{
+    transition: 0.5s all ease;
+    transform:translateY(0%) !important;
+}
+.active-2
 {
     display: none !important;
 }
@@ -206,7 +216,6 @@ input[type="email"], input[type="password"], input[type="text"] {
 }
 .btn-container
 {
-    min-width: 350px;
     display: flex;
     flex-direction: column;
     gap:1rem 0rem;
@@ -263,6 +272,78 @@ input[type="email"], input[type="password"], input[type="text"] {
     box-shadow: -5px 5px 23px #d6d6d6,
                 5px -5px 23px #ffffff;
 }
+.box-2
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width:100vw;
+    height:100vh;
+    transition: 0.5s all ease;
+    transform:translateY(-100%);
+    
+}
+.box-3
+{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    gap:2rem 0rem;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border-radius: 0.2rem;
+     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.tick
+{
+    position: absolute;
+    top: 0%;
+    left:50%;
+    border-radius: 100%;
+    transform:translate(-50%,-50%);
+    background-color: #041e2b;
+    padding:1rem 1rem;
+    font-size: 1.1rem;
+    color:white;
+}
+.box-3-part-2
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:2rem 0rem;
+    margin:3rem 2rem;
+}
+.btn-3
+{
+    background-color: #041e2b;
+    color:White;
+    font-size: 1rem;
+    padding:0.5rem 0rem;
+    border-radius: 0.2rem;
+}
+.info-1
+{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap:1.5rem 0rem;
+}
+.info-1 h1
+{
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+}
+.btn-3
+{
+    width:15rem;
+    cursor:pointer;
+}
 
 @media (max-width : 620px) {
     .container{
@@ -303,19 +384,22 @@ input[type="email"], input[type="password"], input[type="text"] {
 
 /* grid pattern */
 
-.gridContainer {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
-  }
+#gridContainer {
+  box-sizing: border-box;
+  width: 100%;
+}
 
-.emoji-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3rem;
-  }
+#gridContainer div {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid black;
+/*   font-size: 18px; */
+  font-size: 32px; /* increased size */
+  cursor: pointer;
+}
 
 #randomizeBtn{
     width: 100%;
@@ -326,15 +410,4 @@ input[type="email"], input[type="password"], input[type="text"] {
     color: #fff;
     border: none;
     font-size: 12px;
-}
-
-/* styling for choosing password */
-.typepass{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-button{
-    cursor: pointer;
 }

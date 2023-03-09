@@ -6,27 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="style1.css">
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.js"></script>
 </head>
-<body>
+<body onload="randomizeEmojis()">
 
     <section>
         <div class="container">
             <div class="cont-left">
                 <div class="container2">
-                    <div class="gridContainer"></div>
+                    <div id="gridContainer"></div>
                     <br><br>
                     <div class="btn-container">
-                        <div class="typepass">
-                            <p>Choose the type of password</p>
-                            <select id="category">
-                                <option value="default">Options</option>
-                            </select>
-                        </div>
-                        <button id="clear" class="btn-section">Clear</button>
-                        <button class="prev btn-section">Back</button>
-                        <button type="button" id="submitData" name="submitData" class="registerbtn btn-section">Register</button>
+                    <button id="randomizeBtn" class="btn-section">Clear</button>
+                    <button class="prev btn-section">Back</button>
+                    <button type="button" id="submitData" name="submitData" class="registerbtn btn-section">Register</button>
                     </div>
                 </div>
               
@@ -51,18 +46,36 @@
         
         
     </section>
+    <section class="box-2">
+        <div class="box-3">
+            <div class="tick">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="box-3-part-2">
+              <div class="info-1">
+              <h1>Sign Up Successfull</h1>
+              <p>Your details have been successfully submitted</p>
+             </div>
+            <button class="btn-3">
+                OK
+            </button>
+            </div>
+        </div>
+    </section>
     
 </body>
 </html>
 
 <!-- <script src="./index.js"></script> -->
 <script>
-        const url = 'data.json';
         
         let next=document.querySelector(".next");
         let prev=document.querySelector(".prev");
+        let btn3=document.querySelector(".btn-3");
         let cont_right=document.querySelector(".cont-right");
         let cont_left=document.querySelector(".cont-left");
+        let box=document.querySelector(".box-2");
+        let container=document.querySelector(".container");
         next.addEventListener("click",xyz);
         prev.addEventListener("click",xyz);
         function xyz()
@@ -81,93 +94,113 @@
             }
         }
 
-        const selected = [];
 
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const categoryDropdown = document.getElementById('category');
-            let selectedCategory = Object.keys(data)[0];
-            const emojiGrid = document.querySelector('.gridContainer');
-            
 
-            // Populate category dropdown options
-            Object.keys(data).forEach(category => {
-            const option = document.createElement('option');
-            option.value = category;
-            option.text = category;
-            categoryDropdown.appendChild(option);
-            });
+        const gcontainer = document.getElementById("gridContainer");
+        const randomizeBtn = document.getElementById("randomizeBtn");
+        const selectedEmoji = document.getElementById("selectedEmoji");
+        const emojis = [
+            "😀",
+            "😃",
+            "😄",
+            "😁",
+            "😆",
+            "😅",
+            "😂",
+            "😊",
+            "😇",
+            "🥰",
+            "😍",
+            "🤩",
+            "😘",
+            "😗",
+            "😚",
+            "😙",
+            "😜",
+            "😝",
+            "😛",
+            "🤪",
+            "😎",
+            "🤓",
+            "😏",
+            "😒",
+            "😞",
+        ];
+        const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+        let selected = [];
 
-            // Listen for category dropdown change
-            categoryDropdown.addEventListener('change', function() {
-            selectedCategory = categoryDropdown.value;
-            const emojis = data[selectedCategory];
-            const letters = Array.from({length: emojis.length}, (_, i) => String.fromCharCode(97 + i));
-            const emojiMap = Object.fromEntries(emojis.map((emoji, i) => [letters[i], emoji]));
-            console.log(emojiMap);
-            shuffle(letters);
-            // Clear the grid
-            emojiGrid.innerHTML = '';
-
-            // Add each emoji to the grid
-            letters.forEach(letter => {
-                const emoji = emojiMap[letter];
-                const emojiItem = document.createElement('div');
-                emojiItem.classList.add('emoji-item');
-                emojiItem.style.cursor = 'pointer';
-                emojiItem.textContent = emoji;
-                emojiItem.setAttribute('data-value', letter);
-                emojiGrid.appendChild(emojiItem);
-
-                // // Listen for emoji click
-                // emojiItem.addEventListener('click', function() {
-                //   if (selected.length < 4) {
-                //     const value = this.getAttribute('data-value');
-                //     selected.push(value);
-                //     this.classList.add('selected');
-                //     console.log(selected);
-                //   }
-                // });
-
-                // Listen for emoji item click
-                emojiItem.addEventListener('click', function() {
-                if (selected.length < 4 && !selected.includes(emojiItem.dataset.value)) {
-                    const value = this.getAttribute('data-value');
-                    selected.push(value);
-                    emojiItem.style.backgroundColor = 'green';
-                    this.classList.add('selected');
+        for (let i = 0; i < 25; i++) {
+            let div = document.createElement("div");
+            div.innerHTML = emojis[i];
+            div.setAttribute("data-value", alphabets[i]);
+            div.addEventListener("click", function () {
+                if (selected.length == 4) {
                     console.log(selected);
+                    return;
                 }
-                if(selected.length == 4){
-                    //sorts the array then goes for hashing.
-                    selected.sort();
+                if (selected.indexOf(this) === -1) {
+                    selected.push(this.getAttribute("data-value"));
+                    // selectedEmoji.innerHTML = selected.join("");
+                    this.style.backgroundColor = "green";
+                } else {
+                    selected.splice(selected.indexOf(this), 1);
+                    this.style.backgroundColor = "";
+                }
+                if (selected.length == 4) {
                     console.log(selected);
-                    hashpass(selected);
+                    return;
                 }
-                });
             });
-            });
-            function shuffle(arr) {
-                for (let i = arr.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [arr[i], arr[j]] = [arr[j], arr[i]];
-                }
-                return arr;
+            gcontainer.appendChild(div);
+
+            if ((i + 1) % 5 === 0) {
+                gcontainer.appendChild(document.createElement("br"));
+            }
+        }
+
+        // randomizeBtn.addEventListener("click", function () {
+        //     let children = Array.from(gcontainer.children);
+        //     let emojisDiv = children.filter((child) => child.tagName === "DIV");
+
+        //     for (let i = 0; i < emojisDiv.length; i++) {
+        //         let randomIndex = Math.floor(Math.random() * emojisDiv.length);
+        //         let temp = emojisDiv[i].innerHTML;
+        //         let tempValue = emojisDiv[i].getAttribute("data-value");
+        //         emojisDiv[i].innerHTML = emojisDiv[randomIndex].innerHTML;
+        //         emojisDiv[i].setAttribute(
+        //             "data-value",
+        //             emojisDiv[randomIndex].getAttribute("data-value")
+        //         );
+        //         emojisDiv[randomIndex].innerHTML = temp;
+        //         emojisDiv[randomIndex].setAttribute("data-value", tempValue);
+        //         emojisDiv[i].style.backgroundColor = "";
+        //     }
+        //     selected = [];
+        //     selectedEmoji.innerHTML = "";
+        // });
+
+        function randomizeEmojis() {
+            let children = Array.from(gcontainer.children);
+            let emojisDiv = children.filter((child) => child.tagName === "DIV");
+
+            for (let i = 0; i < emojisDiv.length; i++) {
+                let randomIndex = Math.floor(Math.random() * emojisDiv.length);
+                let temp = emojisDiv[i].innerHTML;
+                let tempValue = emojisDiv[i].getAttribute("data-value");
+                emojisDiv[i].innerHTML = emojisDiv[randomIndex].innerHTML;
+                emojisDiv[i].setAttribute(
+                    "data-value",
+                    emojisDiv[randomIndex].getAttribute("data-value")
+                );
+                emojisDiv[randomIndex].innerHTML = temp;
+                emojisDiv[randomIndex].setAttribute("data-value", tempValue);
+                emojisDiv[i].style.backgroundColor = "";
             }
 
-            // Add event listener to clear button
-            const clearButton = document.getElementById('clear');
-            clearButton.addEventListener('click', function() {
-                selected.forEach(value => {
-                    const selectedEmoji = emojiGrid.querySelector(`[data-value="${value}"]`);
-                    selectedEmoji.style.backgroundColor = '';
-                });
-                selected.length = 0;
-                console.log(selected);
-            });
-        });
-    
+            selected = [];
+            selectedEmoji.innerHTML = "";
+        }
+
     let hashpass = (selected) => {
         const Pass = selected.toString();
         let pass = Pass.replace(new RegExp(",", "g"), "");
@@ -233,11 +266,11 @@
 
     let submitData = document.querySelector("#submitData");
     let form = document.querySelector(".form");
+    btn3.addEventListener("click",xyz2);
     submitData.addEventListener('click', (e) =>{
         const email = form.email.value;
         const password = form.password.value;
         let ans = hashpass(selected);
-        console.log(ans);
 
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -249,9 +282,19 @@
                 password: password
             })
             .then(() => {
-                alert("sign up successful");
-                form.reset();
+                // alert("sign up successful");
+                if(!box.classList.contains("active-1"))
+                {
+                box.classList.add("active-1");
+                container.classList.add("active-2");
+                setTimeout(function()
+                {
+                    form.reset();
                 location.replace("../login-page/welcome.html")
+                 },10000);
+                }
+               
+                
             })
         })
         .catch((error) => {
@@ -261,6 +304,12 @@
             alert(errorMessage);
         });
     })
+    function xyz2()
+    {
+        form.reset();
+        location.replace("../login-page/welcome.html")
+        
+    }
 
     // const q = query(colRef, where("email", "==", "anumishra@gmail.com"))
 
