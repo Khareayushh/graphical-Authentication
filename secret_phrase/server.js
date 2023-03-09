@@ -60,10 +60,8 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/contact.html");
 });
 
-let mailer;
-
 app.post("/", (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -73,8 +71,8 @@ app.post("/", (req, res) => {
     },
   });
 
-  const phrase = req.body.phrase;
-  console.log(phrase);
+//   console.log(phrase)
+  const phrase = req.body.phrase;  
 
   const mailoptions = {
     from: "0105cs201021@oriental.ac.in",
@@ -83,18 +81,15 @@ app.post("/", (req, res) => {
     text: phrase,
   };
 
-  mailer = req.body.email;
-  // console.log(mailer);
-  // console.log(phrase)
+  console.log(phrase)
 
   transporter.sendMail(mailoptions, (error, info) => {
     if (error) {
       console.log(error);
       res.send("error");
     } else {
-      // console.log("Email sent: " + info);
+      console.log("Email sent: " + info.response);
       res.send("success");
-      // location.replace('../GAS-for-Bank-main/index.html')
     }
   });
 });
@@ -102,5 +97,3 @@ app.post("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`server running on PORT: ${PORT}`);
 });
-
-// export {mailer};

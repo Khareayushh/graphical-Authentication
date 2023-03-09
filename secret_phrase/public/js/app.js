@@ -49,17 +49,15 @@ function generateSecretPhrase(numWords) {
 
 const phrase = generateSecretPhrase(4);
 
-let mailer;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     let formData = {
-        email: email.value,
-        phrase: phrase,
-    }
+      email: email.value,
+      phrase: phrase,
+    };
 
-    mailer = email.value;
     console.log(formData);
     
     let xhr = new XMLHttpRequest();
@@ -77,13 +75,16 @@ form.addEventListener('submit', (e) => {
 
     xhr.send(JSON.stringify(formData));
 
-    let phrase_checker = document.querySelector(".phrase-checker");
-    let form_section = document.querySelector(".form-section");
+})
+
+let phrase_checker = document.querySelector(".phrase-checker");
+let form_section = document.querySelector(".form-section");
+let submit = document.querySelector(".submit");
+submit.addEventListener('click', () => {
     setTimeout(() => {
-        phrase_checker.style.display = "block";
-        form_section.style.display = "none";
+      phrase_checker.style.display = "block";
+      form_section.style.display = "none";
     }, 3000);
-    
 })
 
 let redirect = document.querySelector(".redirect");
