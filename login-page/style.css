@@ -313,34 +313,51 @@ input[type="email"], input[type="password"]{
 
 /* grid pattern */
 
-#gridContainer {
-  box-sizing: border-box;
-  width: 100%;
-}
+/* grid pattern */
 
-#gridContainer div {
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid black;
-/*   font-size: 18px; */
-  font-size: 32px; /* increased size */
-  cursor: pointer;
-}
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+  }
+
+.emoji-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+  }
 
 .container2 button{
     width: 100%;
-    margin: 25px 0;
+    margin-bottom: 15px;
     padding: 9px 8px;
     border-radius: 4px;
     background: #041e2b;
     color: #fff;
     border: none;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .container2{
     display: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+.typepass {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+}
+
+.btn-container{
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
 }
