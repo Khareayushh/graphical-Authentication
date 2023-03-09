@@ -242,12 +242,12 @@
             snapshot.docs.forEach((doc) => {
                 ans.push({ ...doc.data(), id: doc.id })
             })
-            if(ans[0].grid_pass == hash1){
-                console.log("pass")
+            if (ans[0].grid_pass == hash1) {
+                alert("right pattern")
                 location.replace("./welcome.html");
             }
             else
-            console.log("fail")
+                alert("wrong pattern");
         })
     })
 
