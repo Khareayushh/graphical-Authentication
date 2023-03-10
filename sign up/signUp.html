@@ -51,6 +51,22 @@
         
         
     </section>
+    <section class="box-2">
+        <div class="box-3">
+            <div class="tick">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="box-3-part-2">
+              <div class="info-1">
+              <h1>Sign Up Successfull</h1>
+              <p>Your details have been successfully submitted</p>
+             </div>
+            <button class="btn-3">
+                OK
+            </button>
+            </div>
+        </div>
+    </section>
     
 </body>
 </html>
@@ -61,8 +77,11 @@
         
         let next=document.querySelector(".next");
         let prev=document.querySelector(".prev");
+        let btn3=document.querySelector(".btn-3");
         let cont_right=document.querySelector(".cont-right");
         let cont_left=document.querySelector(".cont-left");
+        let box=document.querySelector(".box-2");
+        let container=document.querySelector(".container");
         next.addEventListener("click",xyz);
         prev.addEventListener("click",xyz);
         function xyz()
@@ -233,11 +252,11 @@
 
     let submitData = document.querySelector("#submitData");
     let form = document.querySelector(".form");
+    btn3.addEventListener("click",xyz2);
     submitData.addEventListener('click', (e) =>{
         const email = form.email.value;
         const password = form.password.value;
         let ans = hashpass(selected);
-        console.log(ans);
 
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -249,9 +268,19 @@
                 password: password
             })
             .then(() => {
-                alert("sign up successful");
-                form.reset();
+                // alert("sign up successful");
+                if(!box.classList.contains("active-1"))
+                {
+                box.classList.add("active-1");
+                container.classList.add("active-2");
+                setTimeout(function()
+                {
+                    form.reset();
                 location.replace("../login-page/welcome.html")
+                 },10000);
+                }
+               
+                
             })
         })
         .catch((error) => {
@@ -261,6 +290,13 @@
             alert(errorMessage);
         });
     })
+    function xyz2()
+    {
+        form.reset();
+        location.replace("../login-page/welcome.html")
+        
+    }
+
 
     // const q = query(colRef, where("email", "==", "anumishra@gmail.com"))
 
