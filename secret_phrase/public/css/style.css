@@ -70,3 +70,28 @@ form
     background-color: #041e2b;
     color:white;
 }
+
+.phrase-checker{
+    display: none;
+}
+
+.phrase-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.phrase-container input{    
+    margin: 0.9rem 0;
+    width: 22rem;
+    height:2rem;
+    outline:none;
+    border:2.5px solid #ddd;   
+}
+
+.phrase-container button{
+    padding:0.5rem 3.5rem;
+    background: #041e2b;
+    color: white;
+}

@@ -1,0 +1,128 @@
+/* label {
+    display: block;
+    margin-bottom: 10px;
+  } */
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body{
+      background: #efefef;
+    }
+
+    .container-1{
+      display: block;
+    }
+
+    .container-2{
+      display: none;
+    }
+
+    .container-1 #email{
+      /* width: 94%; */
+      margin-top: 0.8rem;
+    height: 35px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border: 2.5px solid #ddd;
+    outline: none;
+    padding: 5px;
+    }
+
+    .nextbtn{
+      /* width: 100%; */
+    margin: 25px 0;
+    padding: 9px 2rem;
+    border-radius: 4px;
+    background: #041e2b;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    }
+
+    .email-cont{
+      display: flex;
+      flex-direction: column;
+      /* width: 13rem; */
+      align-items: center;
+      justify-content: center;
+      margin-top: 15%;
+    }
+
+    .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .container .label{
+      padding: 2rem 0 1rem 0;
+      font-size: medium;
+      text-transform: uppercase;
+      text-decoration: solid;
+    }
+
+    .container .btn{
+      padding: 0.4rem 0.8rem 0.4rem 0.9rem;
+      border-radius: 0.2rem;
+      border: none;
+      background: whitesmoke;
+      outline: none;
+      margin-bottom: 2rem;
+      box-shadow: 2px 2px 12px #ccc;
+    }
+
+    .emoji-grid {
+      /* height: 18rem; */
+      width: 24rem;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .emoji-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+    }
+
+    .buttons{
+      display: none;
+    }
+
+    .clear_grid{
+      /* display: none; */
+      /* margin-top: 7rem; */
+      margin-right: 2rem;
+    }
+
+    .popup{
+      padding: 2rem 2rem 0 2rem;
+      font-weight: bold;
+      line-height: 1rem;
+      position: absolute;
+      border-radius: 1rem;
+      background: #ddd;
+    }
+
+    .btn{
+      cursor: pointer;
+    }
+
+    .btns{
+      display: flex;
+      justify-content: end;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      margin-right: 0.5rem;
+      /* cursor: pointer; */
+    }
+
+    .popup{
+      display: none;
+    }
